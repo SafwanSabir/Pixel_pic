@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import ImageUploader from './components/ImageUploader';
 import Controls from './components/Controls';
 import PixelCanvas from './components/PixelCanvas';
-import { Layers, Sun, Moon, Sparkles } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { removeBackground } from '@imgly/background-removal';
 
 const PixelEditor = () => {
@@ -13,17 +13,7 @@ const PixelEditor = () => {
   const [saturation, setSaturation] = useState(100);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const canvasRef = useRef(null);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
 
   const handleDownload = () => {
     if (canvasRef.current) {
@@ -68,26 +58,27 @@ const PixelEditor = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center ">
-      {/* Header */}
-      <header className="mb-12 text-center relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
-        <button
-          onClick={toggleTheme}
-          className="absolute right-0 top-0 p-2 bg-pixel-card border-2 border-pixel-border transition-colors cursor-pointer hover:border-pixel-accent-hover"
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </button>
-        <div className="inline-flex items-center justify-center p-4 bg-pixel-card border-4 border-pixel-primary shadow-pixel-accent mb-4 mt-14 transform -rotate-2 hover:rotate-0 transition-transform">
-            <Layers className="w-8 h-8 md:w-12 md:h-12 text-pixel-primary mr-4" />
-            <h1 className="text-2xl md:text-4xl font-press-start text-color-text text-shadow-pixel">
+    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center">
+      
+      <div className="win95-window w-full max-w-5xl mx-auto mt-4 md:mt-8">
+        <div className="win95-titlebar">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4" />
+            <span>Pixel_pic.exe</span>
+          </div>
+          <div className="win95-button !py-0 !px-1 font-sans text-xs font-bold w-5 h-5 flex items-center justify-center">X</div>
+        </div>
+        
+        <div className="p-4 md:p-6 bg-[#c0c0c0]">
+          {/* Header */}
+          <header className="mb-8 text-center flex flex-col items-center justify-center">
+            <h1 className="text-2xl md:text-4xl font-press-start text-black">
                 PIXEL PIC
             </h1>
-        </div>
-        <p className="font-press-start text-xs md:text-sm text-pixel-muted mt-8 tracking-wider">
-            RETRO IMAGE CONVERTER
-        </p>
-      </header>
+            <p className="font-press-start text-xs md:text-sm text-gray-700 mt-4 tracking-wider">
+                RETRO IMAGE CONVERTER
+            </p>
+          </header>
 
       {/* Main Content */}
       <main className="w-full relative z-10">
@@ -121,11 +112,15 @@ const PixelEditor = () => {
             
             {/* Loading Overlay */}
             {isProcessing && (
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
-                <div className="bg-pixel-card p-8 border-4 border-pixel-primary shadow-pixel text-center">
-                  <Sparkles className="w-12 h-12 text-pixel-primary mx-auto mb-4 animate-spin" />
-                  <p className="font-press-start text-pixel-primary mb-2">DOING MAGIC...</p>
-                  <p className="font-mono text-xs text-pixel-muted">REMOVING BACKGROUND (This may take a moment)</p>
+              <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+                <div className="win95-window p-6 text-center max-w-sm w-full mx-4">
+                  <div className="win95-titlebar mb-4">
+                    <span>Processing...</span>
+                  </div>
+                  <p className="font-sans text-sm mb-4">Removing background. Please wait...</p>
+                  <div className="w-full bg-[#808080] h-4 win95-inset">
+                    <div className="bg-[#000080] h-full animate-pulse"></div>
+                  </div>
                 </div>
               </div>
             )}
@@ -134,15 +129,18 @@ const PixelEditor = () => {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 text-center text-pixel-muted font-mono text-xs flex flex-col items-center gap-1">
+      <footer className="mt-8 text-center text-gray-700 font-sans text-xs flex flex-col items-center gap-1">
         <p>BUILD WITH REACT & TAILWIND</p>
         <p>
           Find more works 
-          <a href="https://yuteoctober.github.io/wins95Portfolio/" target="_blank" rel="noopener noreferrer" className="text-pixel-primary hover:text-pixel-accent ml-1 hover:underline transition-colors">
+          <a href="https://yuteoctober.github.io/wins95Portfolio/" target="_blank" rel="noopener noreferrer" className="text-[#000080] hover:underline ml-1">
           @here
           </a>
         </p>
       </footer>
+      
+      </div>
+      </div>
     </div>
   );
 };

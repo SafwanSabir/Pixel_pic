@@ -59,7 +59,7 @@ const PixelCanvas = ({ imageSrc, pixelSize, contrast, brightness, saturation, ca
   }, [imageSrc, pixelSize, contrast, brightness, saturation, ref]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex justify-center mb-8 overflow-hidden border-4 border-pixel-muted bg-pixel-base shadow-pixel ">
+    <div className="w-full max-w-4xl mx-auto flex justify-center mb-8 overflow-hidden win95-inset bg-[#808080] p-1">
       <canvas
         ref={ref}
         className="max-w-full h-auto object-contain image-pixelated"

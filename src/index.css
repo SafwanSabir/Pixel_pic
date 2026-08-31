@@ -5,45 +5,24 @@
   --font-press-start: "Press Start 2P", cursive;
   --font-sans: Inter, sans-serif;
 
-  --color-pixel-dark: #121212;
-  --color-pixel-card: #1e1e1e;
-  --color-pixel-accent: #00ff9d;
-  --color-pixel-accent-hover: #00cc7d;
-  --color-pixel-border: #333333;
-  --color-pixel-text: #e0e0e0;
-  --color-pixel-muted: #888888;
-
-  --shadow-pixel: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
-  --shadow-pixel-sm: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
-  --shadow-pixel-accent: 4px 4px 0px 0px #00cc7d;
-
-  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --color-win-bg: #008080;
+  --color-win-surface: #c0c0c0;
+  --color-win-highlight: #ffffff;
+  --color-win-shadow: #808080;
+  --color-win-dark-shadow: #000000;
+  --color-win-title: #000080;
+  --color-win-title-text: #ffffff;
+  
+  --color-pixel-card: #c0c0c0; /* Fallback for existing components */
+  --color-pixel-border: #808080;
+  --color-pixel-primary: #000080;
+  --color-pixel-muted: #808080;
 }
 
 :root {
-  --color-bg: #121212;
-  --color-text: #e0e0e0;
-  --color-pixel-card: #1e1e1e;
-  --color-pixel-border: #333333;
-  --color-pixel-border-toggle: #e7e6e6;
-  --color-pixel-muted: #888888;
-  --color-pixel-primary: #00ff9d;
-  --color-pixel-base: #121212;
+  --color-bg: #008080;
+  --color-text: #000000;
 }
-
-[data-theme='light'] {
-  --color-bg: #f4f4f4;
-  --color-text: #1a1a1a;
-  --color-pixel-card: #ffffff;
-  --color-pixel-border: #e5e5e5;
-  --color-pixel-border-toggle: #161616;
-  --color-pixel-muted: #666666;
-  --color-pixel-dark: #f4f4f4;
-  /* Override for light mode compatibility if used directly */
-  --color-pixel-primary: #00cc7d;
-  --color-pixel-base: #f4f4f4;
-}
-
 
 body {
   margin: 0;
@@ -52,63 +31,135 @@ body {
   color: var(--color-text);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
   overscroll-behavior: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-button,
-.pixel-font {
+h1, h2, h3, h4, button, .pixel-font {
   font-family: 'Press Start 2P', cursive;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+/* Win95 Window Container */
+.win95-window {
+  background-color: var(--color-win-surface);
+  border-top: 2px solid var(--color-win-highlight);
+  border-left: 2px solid var(--color-win-highlight);
+  border-right: 2px solid var(--color-win-dark-shadow);
+  border-bottom: 2px solid var(--color-win-dark-shadow);
+  box-shadow: inset -1px -1px 0px var(--color-win-shadow), inset 1px 1px 0px var(--color-win-surface);
+  padding: 2px;
 }
 
-::-webkit-scrollbar-track {
-  background: #1e1e1e;
+/* Win95 Title Bar */
+.win95-titlebar {
+  background-color: var(--color-win-title);
+  color: var(--color-win-title-text);
+  padding: 3px 4px 3px 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border: 2px solid #1e1e1e;
+/* Win95 Button */
+.win95-button {
+  background-color: var(--color-win-surface);
+  border-top: 2px solid var(--color-win-highlight);
+  border-left: 2px solid var(--color-win-highlight);
+  border-right: 2px solid var(--color-win-dark-shadow);
+  border-bottom: 2px solid var(--color-win-dark-shadow);
+  box-shadow: inset -1px -1px 0px var(--color-win-shadow);
+  padding: 4px 8px;
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #444;
+.win95-button:active {
+  border-top: 2px solid var(--color-win-dark-shadow);
+  border-left: 2px solid var(--color-win-dark-shadow);
+  border-right: 2px solid var(--color-win-highlight);
+  border-bottom: 2px solid var(--color-win-highlight);
+  box-shadow: inset 1px 1px 0px var(--color-win-shadow);
+  padding-top: 6px; /* Shift content down */
+  padding-left: 10px; /* Shift content right */
+  padding-bottom: 2px;
+  padding-right: 6px;
+}
+
+.win95-button:disabled {
+  color: var(--color-win-shadow);
+  text-shadow: 1px 1px 0px var(--color-win-highlight);
+  cursor: not-allowed;
+}
+
+/* Win95 Inset (for inputs, canvas) */
+.win95-inset {
+  background-color: #ffffff;
+  border-top: 2px solid var(--color-win-shadow);
+  border-left: 2px solid var(--color-win-shadow);
+  border-right: 2px solid var(--color-win-highlight);
+  border-bottom: 2px solid var(--color-win-highlight);
+  box-shadow: inset 1px 1px 0px var(--color-win-dark-shadow), inset -1px -1px 0px var(--color-win-surface);
 }
 
 /* Slider Styles */
 .slider-input {
-  @apply appearance-none outline-none h-6;
+  @apply appearance-none outline-none h-4;
+  background: var(--color-win-surface);
+  border-top: 2px solid var(--color-win-shadow);
+  border-left: 2px solid var(--color-win-shadow);
+  border-right: 2px solid var(--color-win-highlight);
+  border-bottom: 2px solid var(--color-win-highlight);
+  box-shadow: inset 1px 1px 0px var(--color-win-dark-shadow);
   touch-action: none;
 }
 
 .slider-input::-webkit-slider-thumb {
-  @apply appearance-none w-4.5 h-4.5 bg-pixel-accent rounded-[2px] border-pixel-card shadow-pixel-sm cursor-pointer hover:bg-pixel-accent-hover;
+  @apply appearance-none w-3 h-6 cursor-pointer;
+  background-color: var(--color-win-surface);
+  border-top: 1px solid var(--color-win-highlight);
+  border-left: 1px solid var(--color-win-highlight);
+  border-right: 1px solid var(--color-win-dark-shadow);
+  border-bottom: 1px solid var(--color-win-dark-shadow);
+  box-shadow: inset -1px -1px 0px var(--color-win-shadow);
 }
 
 .slider-input::-moz-range-thumb {
-  @apply w-4.5 h-4.5 bg-pixel-accent rounded-[2px] border-pixel-card shadow-pixel-sm cursor-pointer hover:bg-pixel-accent-hover;
+  @apply w-3 h-6 cursor-pointer;
+  background-color: var(--color-win-surface);
+  border-top: 1px solid var(--color-win-highlight);
+  border-left: 1px solid var(--color-win-highlight);
+  border-right: 1px solid var(--color-win-dark-shadow);
+  border-bottom: 1px solid var(--color-win-dark-shadow);
+  box-shadow: inset -1px -1px 0px var(--color-win-shadow);
+  border-radius: 0;
 }
 
 /* Utilities */
-.pixel-corners {
-  clip-path: polygon(0px 4px, 4px 4px, 4px 0px,
-      calc(100% - 4px) 0px, calc(100% - 4px) 4px, 100% 4px,
-      100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
-      4px 100%, 4px calc(100% - 4px), 0px calc(100% - 4px));
-}
-
 .image-pixelated {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+}
+
+/* Custom Scrollbar for Win95 */
+::-webkit-scrollbar {
+  width: 16px;
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-track {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2rVq1X8wjoEAQQwABBgAOT0DA8W6tB4AAAAASUVORK5CYII=');
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-win-surface);
+  border-top: 2px solid var(--color-win-highlight);
+  border-left: 2px solid var(--color-win-highlight);
+  border-right: 2px solid var(--color-win-dark-shadow);
+  border-bottom: 2px solid var(--color-win-dark-shadow);
+  box-shadow: inset -1px -1px 0px var(--color-win-shadow);
 }

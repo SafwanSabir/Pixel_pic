@@ -41,10 +41,10 @@ const ImageUploader = ({ onImageUpload }) => {
   return (
     <div
       className={clsx(
-        "relative flex flex-col items-center justify-center w-full max-w-2xl h-64 border-4 border-dashed transition-all cursor-pointer font-press-start",
+        "relative flex flex-col items-center justify-center w-full max-w-2xl h-64 win95-inset transition-all cursor-pointer",
         isDragging 
-          ? "border-pixel-accent bg-pixel-accent/10 scale-102" 
-          : "border-pixel-muted hover:border-pixel-text bg-pixel-card",
+          ? "bg-[#000080] text-white" 
+          : "bg-white text-black",
         "mx-auto my-8 p-8 text-center"
       )}
       onDragOver={handleDragOver}
@@ -60,22 +60,16 @@ const ImageUploader = ({ onImageUpload }) => {
         className="hidden"
       />
       
-      <div className="bg-pixel-dark p-4 rounded-none mb-4 shadow-pixel-sm border-2 border-pixel-muted">
-        <Upload className={clsx("w-12 h-12 text-pixel-primary", isDragging && "animate-bounce")} />
+      <div className={`p-4 mb-4 ${isDragging ? 'text-white' : 'text-black'}`}>
+        <Upload className={clsx("w-12 h-12", isDragging && "animate-bounce")} />
       </div>
       
-      <h3 className="text-sm md:text-base mb-2 text-pixel-text">
+      <h3 className="text-sm md:text-base mb-2 font-bold font-sans">
         DRAG & DROP IMAGE
       </h3>
-      <p className="text-xs text-pixel-muted font-sans tracking-widest">
+      <p className="text-xs font-sans tracking-widest">
         OR CLICK TO BROWSE
       </p>
-
-      {/* Decorative corners */}
-      <div className="absolute top-0 left-0 w-2 h-2 bg-pixel-text -ml-1 -mt-1" />
-      <div className="absolute top-0 right-0 w-2 h-2 bg-pixel-text -mr-1 -mt-1" />
-      <div className="absolute bottom-0 left-0 w-2 h-2 bg-pixel-text -ml-1 -mb-1" />
-      <div className="absolute bottom-0 right-0 w-2 h-2 bg-pixel-text -mr-1 -mb-1" />
     </div>
   );
 
