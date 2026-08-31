@@ -8,7 +8,7 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  base: '/Pixel_pic/',
+  base: './',
   server: {
     headers: {
       "Cross-Origin-Opener-Policy": "same-origin",
